@@ -87,22 +87,25 @@ public class DepartmentFormController implements Initializable {
 	}
 
 	private Department getFormData() {
-		Department obj = new Department();
-		
-		ValidationException exception = new ValidationException("Validation error");
-		
-		obj.setId(Utils.tryParseToInt(txtId.getText()));
-		
-		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
-			exception.addError("name", "Field can't be empty");
-		}
-		obj.setName(txtName.getText());
-		
-		if (exception.getErrors().size() > 0) {
-			throw exception;
-		}
-		
-		return obj;
+	    Department obj = new Department();
+
+	    ValidationException exception = new ValidationException("Validation error");
+		txtId.setText(String.valueOf(entity.getId()));
+
+
+	    obj.setId(Utils.tryParseToInt(txtId.getText()));
+	    
+	    if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+	        exception.addError("name", "Field can't be empty");
+	    }
+	    obj.setName(txtName.getText());
+
+	    if (exception.getErrors().size() > 0) {
+	        throw exception;
+	    }
+
+	    txtId.setText(String.valueOf(obj.getId())); // Adicionado essa linha
+	    return obj;
 	}
 
 	@FXML
